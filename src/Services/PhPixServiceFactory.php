@@ -3,13 +3,15 @@
 namespace PedroBruning\PhPix\Services;
 
 use PedroBruning\PhPix\Services\Contracts\PhPixService;
+use PedroBruning\PhPix\Services\Factories\OpenPixServiceFactory;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class PhPixServiceFactory
 {
-    public static function make(string $provider, HttpClientInterface $client): PhPixService
+    public static function make(Providers $provider, HttpClientInterface $client): PhPixService
     {
-        switch ($provider)
-        {}
+        return match ($provider) {
+            Providers::OpenPix => OpenPixServiceFactory::make($client)
+        };
     }
 }

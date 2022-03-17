@@ -2,9 +2,15 @@
 
 namespace PedroBruning\PhPix\Services\Contracts;
 
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use PedroBruning\Models\Contracts\ChargeRequest;
 
 interface ChargeService
 {
-    public function __construct(HttpClientInterface $client);
+    public function getById(string $id);
+
+    public function getByFilter(array $filter);
+
+    public function create(ChargeRequest $chargeRequest);
+
+    public function getQrCodeById(string $id);
 }

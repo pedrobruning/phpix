@@ -1,6 +1,6 @@
 <?php
 
-namespace PedroBruning\PhPix\Factories;
+namespace PedroBruning\PhPix\Services\Factories;
 
 
 use PedroBruning\PhPix\Services\Contracts\PhPixService;

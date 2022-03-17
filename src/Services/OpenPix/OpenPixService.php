@@ -10,11 +10,10 @@ class OpenPixService implements PhPixService
 {
 
     public function __construct(private ChargeService $chargeService)
-    {
-    }
+    {}
 
     public function charges(): ChargeService
     {
-        return $this->chargeService();
+        return $this->chargeService;
     }
 }
