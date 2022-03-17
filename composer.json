@@ -1,0 +1,20 @@
+{
+  "name": "pedrobruning/phpix",
+  "description": "Biblioteca para integrar seu sistema PHP com o WebService OpenPix",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pedro Henrique Bruning de Oliveira Schier",
+      "email": "pedrohboschier@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PedroBruning\\PhPix\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=8.1"
+  }
+}
