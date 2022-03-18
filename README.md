@@ -2,6 +2,13 @@
 
 Simples biblioteca que facilita a integração com WebServices para PIX.
 
+## Instalação
+
+Para instalar essa biblioteca basta executar o comando a baixo
+```shell
+composer require pedrobruning/phpix
+```
+
 ## Serviços disponíveis
 
 - OpenPix (<https://developers.openpix.com.br/api/>)
