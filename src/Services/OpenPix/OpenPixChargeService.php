@@ -27,7 +27,7 @@ class OpenPixChargeService implements ChargeService
     {
         try {
             $response = $this->client
-                ->request('GET', "charge", $filter);
+                ->request('GET', "charge", ['query' => $filter]);
             return $response->toArray();
         }  catch (ClientExceptionInterface $exception) {
             return $exception->getResponse()->toArray();
