@@ -3,26 +3,20 @@
 namespace Tests;
 
 use PedroBruning\PhPix\Services\Contracts\PhPixService;
+use PedroBruning\PhPix\Services\OpenPix\OpenPixService;
 use PedroBruning\PhPix\Services\PhPixServiceFactory;
+use PedroBruning\PhPix\Services\Providers;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class PhPixServiceTests extends TestCase
+class PhPixServiceFactoryTests extends TestCase
 {
-
-    private function makeSut(string $provider): PhPixService
+    public function test_make_method_returns_the_right_service_provider()
     {
-        return PhPixServiceFactory::make($provider);
-    }
-
-    public function test_ensure_PhPixServiceRepository_returns_correct_service_based_on_provided_provider()
-    {
-        $repositoryMock = $this->getMockBuilder(PhPixService::class)->getMock();
-        $phPixServiceRepositoryStub = $this->createStub(PhPixServiceFactory::class);
-
-        $phPixServiceRepositoryStub->method('make')
-            ->willReturn($repositoryMock);
-
-        $this->assertSame($repositoryMock, $phPixServiceRepositoryStub->make('mock'));
+        $provider = Providers::OpenPix;
+        $clientMock = $this->createMock(HttpClientInterface::class);
+        $sut = PhPixServiceFactory::make($provider, $clientMock);
+        $this->assertInstanceOf(OpenPixService::class, $sut);
     }
 
 }
