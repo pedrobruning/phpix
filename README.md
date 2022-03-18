@@ -31,6 +31,12 @@ use PedroBruning\PhPix\Services\Providers;
 use Symfony\Component\HttpClient\HttpClient; 
 
 //INSTÂNCIA
+//CRIAÇÃO DO CLIENT: Se o provider que você está utilizando precisa de token de authorization você deve informa-lo na criação do client
+$client = HttpClient::create();
+$client = $client->withOptions([
+    'headers' => ['Authorization' => 'YOUR_TOKEN']
+]);
+
 $provider = Providers::YourProvider;
 $phPixService = PhPixServiceFactory::make($provider, $client);
 ```
