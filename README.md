@@ -37,10 +37,11 @@ $client = $client->withOptions([
     'headers' => ['Authorization' => 'YOUR_TOKEN']
 ]);
 
-$provider = Providers::OpenPix;
+$provider = Providers::YourProvider;
 $phPixService = PhPixServiceFactory::make($provider, $client);
 ```
 
+## Cobranças
 ### Obter Cobrança por Id
 ```php
 $chargeId = 'chargeId';
@@ -75,4 +76,26 @@ $chargeRequest = new ChargeRequest(
     ]
 );
 $charge = $phPixService->charges()->create($chargeRequest);
+```
+## Estornos
+### Obter Estorno por Id
+```php
+$refundId = 'refundId';
+$refund = $phPixService->refund()->getById($refundId);
+```
+
+### Obter todos os Estornos
+```php
+$refund = $phPixService->refund()->getAll();
+```
+### Criar Estorno
+Todos os campos que podem ser utilizados para criação do estorno podem ser consultados na própria classe de Request chamada.
+```php
+use PedroBruning\PhPix\Models\OpenPix\RefundRequest;
+$refundRequest = new RefundRequest(
+    value: 100,
+    transactionEndToEndId: 'validTransactionEndToEndId',
+    correlationId: 'validCorrelation'
+);
+$refund = $phPixService->refunds()->create($refundRequest);
 ```
