@@ -14,7 +14,7 @@ composer require pedrobruning/phpix
 - OpenPix (<https://developers.openpix.com.br/api/>)
 
 ## Requisitos
-- Necessário PHP 8.0 ou superior.
+- Necessário PHP 8.1 ou superior.
 - Necessário o pacote **symfony/http-client** na versão ^6.0
 
 ## Utilização
