@@ -2,15 +2,14 @@
 
 namespace PedroBruning\PhPix\Services\Contracts;
 
-use PedroBruning\Models\Contracts\ChargeRequest;
+use PedroBruning\PhPix\Models\Contracts\Request;
+use PedroBruning\PhPix\Models\Charge;
 
 interface ChargeService
 {
-    public function getById(string $id);
+    public function getById(string $id): array;
 
-    public function getByFilter(array $filter);
+    public function getByFilter(array $filter): array;
 
-    public function create(ChargeRequest $chargeRequest);
-
-    public function getQrCodeById(string $id);
+    public function create(Request $chargeRequest): array;
 }
