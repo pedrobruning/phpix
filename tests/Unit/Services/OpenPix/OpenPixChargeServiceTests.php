@@ -5,6 +5,7 @@ namespace Tests\Unit\Services\OpenPix;
 use PedroBruning\PhPix\Models\OpenPix\ChargeRequest;
 use PedroBruning\PhPix\Services\OpenPix\OpenPixChargeService;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -23,15 +24,13 @@ class OpenPixChargeServiceTests extends TestCase
     private function makeSutWithClientThrowing(): OpenPixChargeService
     {
         $clientStub = $this->createStub(HttpClientInterface::class);
-        $clientExceptionMock = $this->createMock(ClientExceptionInterface::class);
-        $responseStub = $this->createStub(ResponseInterface::class);
-        $responseStub->method('toArray')
-            ->willReturn($this->validExceptionResponse());
-        $clientExceptionMock
-            ->method('getResponse')
-            ->willReturn($responseStub);
+        $responseInterfaceStub = $this->createMock(ResponseInterface::class);
+        $responseInterfaceStub
+            ->method('getInfo')
+            ->withConsecutive(['http_code'], ['url'], ['response_headers'])
+            ->willReturnOnConsecutiveCalls('400', 'some_url', []);
         $clientStub->method('request')
-            ->willThrowException($clientExceptionMock);
+            ->willThrowException(new ClientException($responseInterfaceStub));
         return new OpenPixChargeService($clientStub);
     }
 
@@ -257,8 +256,7 @@ class OpenPixChargeServiceTests extends TestCase
     private function validExceptionResponse(): array
     {
         return [
-            'statusCode' => 400,
-            'error' => 'Valid Exception Message'
+            'error' => 'HTTP 400 returned for "some_url".'
         ];
     }
 

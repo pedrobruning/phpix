@@ -4,11 +4,14 @@ namespace PedroBruning\PhPix\Services\OpenPix;
 
 use PedroBruning\PhPix\Models\Contracts\Request;
 use PedroBruning\PhPix\Services\Contracts\ChargeService;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use PedroBruning\PhPix\Services\Traits\ReturnsError;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class OpenPixChargeService implements ChargeService
 {
+    use ReturnsError;
+
     public function __construct(private HttpClientInterface $client)
     {}
 
@@ -18,8 +21,8 @@ class OpenPixChargeService implements ChargeService
             $response = $this->client
                 ->request('GET', "charge/$id");
             return $response->toArray();
-        }  catch (ClientExceptionInterface $exception) {
-            return $exception->getResponse()->toArray();
+        }  catch (ClientException $exception) {
+            return $this->returnError($exception);
         }
     }
 
@@ -29,8 +32,8 @@ class OpenPixChargeService implements ChargeService
             $response = $this->client
                 ->request('GET', "charge", ['query' => $filter]);
             return $response->toArray();
-        }  catch (ClientExceptionInterface $exception) {
-            return $exception->getResponse()->toArray();
+        }  catch (ClientException $exception) {
+            return $this->returnError($exception);
         }
     }
 
@@ -43,8 +46,8 @@ class OpenPixChargeService implements ChargeService
             $response = $this->client
                 ->request('POST', 'charge', $payload);
             return $response->toArray();
-        }  catch (ClientExceptionInterface $exception) {
-            return $exception->getResponse()->toArray();
+        }  catch (ClientException $exception) {
+            return $this->returnError($exception);
         }
     }
 }
