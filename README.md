@@ -31,7 +31,7 @@ use PedroBruning\PhPix\Services\Providers;
 use Symfony\Component\HttpClient\HttpClient; 
 
 //INSTÂNCIA
-$provider = Providers::OpenPix;
+$provider = Providers::YourProvider;
 $phPixService = PhPixServiceFactory::make($provider, $client);
 ```
 
