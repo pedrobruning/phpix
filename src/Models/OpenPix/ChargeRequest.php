@@ -10,7 +10,7 @@ class ChargeRequest implements Request
         'comment', 'identifier', 'customer', 'expiresIn', 'additionalInfo'
     ];
 
-    private array $optionalFields;
+    private array $optionalFields = [];
 
     public function __construct(
         private string $correlationId,
