@@ -81,12 +81,12 @@ $charge = $phPixService->charges()->create($chargeRequest);
 ### Obter Estorno por Id
 ```php
 $refundId = 'refundId';
-$refund = $phPixService->refund()->getById($refundId);
+$refund = $phPixService->refunds()->getById($refundId);
 ```
 
 ### Obter todos os Estornos
 ```php
-$refund = $phPixService->refund()->getAll();
+$refund = $phPixService->refunds()->getAll();
 ```
 ### Criar Estorno
 Todos os campos que podem ser utilizados para criação do estorno podem ser consultados na própria classe de Request chamada.
